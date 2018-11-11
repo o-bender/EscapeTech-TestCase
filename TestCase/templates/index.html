@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="POST" action="/api/users">
+        {% csrf_token %}
+        <label for="firstname">
+            firstname
+            <input type="text" name="firstname" id="firstname">
+        </label>
+        <label for="surname">
+            sirstname
+            <input type="text" name="surname" id="surname">
+        </label>
+        <label for="fathername">
+            fathername
+            <input type="text" name="fathername" id="fathername">
+        </label>
+        <label for="birthdate">
+            birthdate
+            <input type="date" name="birthdate" id="birthdate">
+        </label>
+        <label for="email">
+            email
+            <input type="email" name="email" id="email">
+        </label>
+        <label for="password">
+            password
+            <input type="password" name="password" id="password">
+        </label>
+        <label for="new_password">
+            new password
+            <input type="password" name="new_password" id="new_password">
+        </label>
+
+        <label for="country">
+            country
+            <select name="country" id="country">
+                {% for c in countries %}
+                    <option value="{{ c.country }}">{{ c.country }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label for="eyes_color">
+            eyes color
+            <select name="eyes_color" id="eyes_color">
+                {% for e in eyes %}
+                    <option value="{{ e.eyes_color }}">{{ e.eyes_color }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <button>go</button>
+    </form>
+    <form action="/api/foto" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="email" name="email" value="jon@stark.sm">
+        <input type="password" name="password" value="123">
+        <input type="file" name="foto">
+        <select name="album">
+            {% for a in albums %}
+            <option value="{{ a.title }}">{{ a.title }}</option>
+            {% endfor %}
+        </select>
+        <button>go</button>
+    </form>
+</body>
+</html>

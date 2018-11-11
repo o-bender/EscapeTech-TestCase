@@ -1,0 +1,115 @@
+[
+  {
+    "model": "TestCase.country",
+    "pk": 1,
+    "fields": {
+      "country": "Russia"
+    }
+  },
+  {
+    "model": "TestCase.country",
+    "pk": 2,
+    "fields": {
+      "country": "China"
+    }
+  },
+  {
+    "model": "TestCase.country",
+    "pk": 3,
+    "fields": {
+      "country": "USA"
+    }
+  },
+    {
+    "model": "TestCase.country",
+    "pk": 4,
+    "fields": {
+      "country": "North"
+    }
+  },
+  {
+    "model": "TestCase.eyes",
+    "pk": 1,
+    "fields": {
+      "eyes_color": "Blue"
+    }
+  },
+  {
+    "model": "TestCase.eyes",
+    "pk": 2,
+    "fields": {
+      "eyes_color": "Green"
+    }
+  },
+  {
+    "model": "TestCase.eyes",
+    "pk": 3,
+    "fields": {
+      "eyes_color": "Red"
+    }
+  },
+  {
+    "model": "TestCase.eyes",
+    "pk": 4,
+    "fields": {
+      "eyes_color": "Black"
+    }
+  },
+  {
+    "model": "TestCase.users",
+    "pk": 1,
+    "fields": {
+      "firstname": "Jon",
+      "surname": "Snow",
+      "fathername": "Edarth",
+      "birthdate": "1000-01-01",
+      "country": "North",
+      "email": "jon@stark.sm",
+      "eyes_color": "Black",
+      "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
+    }
+  },
+  {
+    "model": "TestCase.users",
+    "pk": 2,
+    "fields": {
+      "firstname": "Sidious",
+      "surname": "Darth",
+      "fathername": "Vasiliev",
+      "birthdate": "1000-01-01",
+      "country": "Russia",
+      "email": "dark-side@force.ru",
+      "eyes_color": "Red",
+      "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
+    }
+  },
+  {
+    "model": "TestCase.users",
+    "pk": 3,
+    "fields": {
+      "firstname": "Neo",
+      "surname": "Anderson",
+      "fathername": "None",
+      "birthdate": "0001-01-01",
+      "country": "USA",
+      "email": "neo@matrix.us",
+      "eyes_color": "Green",
+      "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
+    }
+  },
+  {
+    "model": "TestCase.fotoalbum",
+    "pk": 1,
+    "fields": {
+      "title": "default"
+    }
+  },
+  {
+    "model": "TestCase.foto",
+    "pk": 1,
+    "fields": {
+      "album": "default",
+      "foto": "test.png"
+    }
+  }
+]
