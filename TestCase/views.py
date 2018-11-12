@@ -1,19 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
 from django.db.models import signals
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.serializers import serialize
-from django.core.mail import send_mail
 from django.dispatch import receiver
 from . import models
 from . import forms
+from . import tasks
 import json
 import secrets
 import os
 from hashlib import sha256
 from functools import wraps
-from PIL import Image
-from io import BytesIO
 
 
 def json_response(status, message='', response_type=HttpResponse):
@@ -43,25 +40,6 @@ def Auth(f):
         except models.Users.DoesNotExist:
             return json_response('error', 'User name or password not valide', HttpResponseForbidden)
     return _
-
-
-def thumbnail_image(image, w, h):
-    img = Image.open(image.file)
-    buffer = BytesIO()
-    img.thumbnail((w, h))
-    img.save(fp=buffer, format='JPEG')
-    return InMemoryUploadedFile(buffer, None, image.name, 'image/jpeg', buffer.tell, None)
-
-
-@receiver(signals.post_save, sender=models.Foto)
-def save_foto(sender, instance, *args, **kwargs):
-    send_mail(
-        'Foto was added to %s album' % instance.album,
-        '',
-        'from@example.com',
-        [instance.user.email],
-        fail_silently=True,
-    )
 
 
 @receiver(signals.post_delete, sender=models.Foto)
@@ -104,15 +82,15 @@ def update_user(request, *args, **kwargs):
     try:
         user.country = models.Country.objects.get(country=post_data.get('country'))
     except models.Country.DoesNotExist as e:
-        return HttpResponse('{"status":"error","message":"%s"}' % str(e))
+        return json_response("error", str(e))
 
     try:
         user.eyes_color = models.Eyes.objects.get(eyes_color=post_data.get('eyes_color'))
     except models.Eyes.DoesNotExist as e:
-        return HttpResponse('{"status":"error","message":"%s"}' % str(e))
+        return json_response("error", str(e))
 
     user.save()
-    return HttpResponse("{'status': 'ok'}")
+    return json_response('ok')
 
 
 @Auth
@@ -121,7 +99,7 @@ def get_fotos(request, user, *args, **kwargs):
     if album.is_valid():
         fotos = models.Foto.objects.filter(album=album.data.get('album'), user=user)
         return HttpResponse(serialize('json', fotos))
-    return HttpResponse('not valide album name')
+    return json_response('error', 'not valid album name')
 
 
 @POST
@@ -131,11 +109,12 @@ def add_foto(request, user, *args, **kwargs):
     if form.is_valid():
         foto = form.save(commit=False)
         foto.user = user
-        foto.middle = thumbnail_image(request.FILES.get('foto'), 600, 600)
-        foto.thumbnail = thumbnail_image(request.FILES.get('foto'), 200, 200)
+        # foto.middle = thumbnail_image(request.FILES.get('foto'), 600, 600)
+        # foto.thumbnail = thumbnail_image(request.FILES.get('foto'), 200, 200)
         foto.save()
-        return HttpResponse('ok')
-    return HttpResponse('err')
+        tasks.save_images.delay(foto.id)
+        return json_response('ok')
+    return json_response('error')
 
 
 @POST
@@ -148,8 +127,8 @@ def delete_foto(request, *args, **kwargs):
                 album=foto.data.get('album'),
                 foto=foto.data.get('foto')).delete()
         except models.Foto.FotoDoesNotExist as e:
-            HttpResponse('{"status":"error","message":"%s"}' % str(e))
-    return HttpResponse('{"status": "deleted"}')
+            json_response("error", str(e))
+    return json_response("deleted")
 
 
 @Auth
@@ -163,8 +142,8 @@ def add_album(request, *args, **kwargs):
     album = forms.AlbumFotoForm(request.POST, request.FILES)
     if album.is_valid():
         models.FotoAlbum(title=album.data.get('album')).save()
-        return HttpResponse('ok')
-    return HttpResponse('not valide album name')
+        return json_response('ok')
+    return json_response('error', 'not valide album name')
 
 
 @POST
@@ -176,5 +155,5 @@ def delete_album(request, *args, **kwargs):
             models.FotoAlbum.objects.get(title=album.data.get('album')).delete()
             return HttpResponse('ok')
         except models.FotoAlbum.FotoAlbumDoesNotExist as e:
-            HttpResponse('{"status":"error","message":"%s"}' % str(e))
-    return HttpResponse('not valide album name')
+            json_response('error', str(e))
+    return json_response('error', 'not valide album name')

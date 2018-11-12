@@ -1,3 +1,6 @@
 Django
 django-admin
 Pillow
+celery
+redis
+django-celery-results

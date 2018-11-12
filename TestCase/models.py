@@ -1,9 +1,11 @@
 from django.db import models
 import uuid
 
+
 class Country(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     country = models.TextField(unique=True)
+    description = models.TextField(null=True)
 
 
 class Eyes(models.Model):
