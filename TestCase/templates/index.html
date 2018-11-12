@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="POST" action="/api/users">
+    <div>
+    <form method="POST" action="/api/user/update">
         {% csrf_token %}
         <label for="firstname">
             firstname
@@ -54,11 +55,14 @@
         </label>
         <button>go</button>
     </form>
-    <form action="/api/foto" method="POST" enctype="multipart/form-data">
+    </div>
+    <div>
+    <form action="/api/foto/add" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="email" name="email" value="jon@stark.sm">
         <input type="password" name="password" value="123">
         <input type="file" name="foto">
+        <input type="text" name="description">
         <select name="album">
             {% for a in albums %}
             <option value="{{ a.title }}">{{ a.title }}</option>
@@ -66,5 +70,46 @@
         </select>
         <button>go</button>
     </form>
+    </div>
+    <div>
+    <form action="/api/foto/delete" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="email" name="email" value="jon@stark.sm">
+        <input type="password" name="password" value="123">
+        <select name="album">
+            {% for a in albums %}
+            <option value="{{ a.title }}">{{ a.title }}</option>
+            {% endfor %}
+        </select>
+        <select name="foto">
+            {% for f in fotos %}
+            <option value="{{ f.foto }}">{{ f.description }}</option>
+            {% endfor %}
+        </select>
+        <button>go</button>
+    </form>
+    </div>
+    <div>
+    <form action="/api/album/add" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="email" name="email" value="jon@stark.sm">
+        <input type="password" name="password" value="123">
+        <input type="text" name="album">
+        <button>go</button>
+    </form>
+    </div>
+    <div>
+    <form action="/api/album/delete" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="email" name="email" value="jon@stark.sm">
+        <input type="password" name="password" value="123">
+        <select name="album">
+            {% for a in albums %}
+            <option value="{{ a.title }}">{{ a.title }}</option>
+            {% endfor %}
+        </select>
+        <button>go</button>
+    </form>
+    </div>
 </body>
 </html>

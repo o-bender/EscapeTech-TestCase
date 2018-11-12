@@ -1,63 +1,63 @@
 [
   {
     "model": "TestCase.country",
-    "pk": 1,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e18c",
     "fields": {
       "country": "Russia"
     }
   },
   {
     "model": "TestCase.country",
-    "pk": 2,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e182",
     "fields": {
       "country": "China"
     }
   },
   {
     "model": "TestCase.country",
-    "pk": 3,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e183",
     "fields": {
       "country": "USA"
     }
   },
     {
     "model": "TestCase.country",
-    "pk": 4,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e184",
     "fields": {
       "country": "North"
     }
   },
   {
     "model": "TestCase.eyes",
-    "pk": 1,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e185",
     "fields": {
       "eyes_color": "Blue"
     }
   },
   {
     "model": "TestCase.eyes",
-    "pk": 2,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e186",
     "fields": {
       "eyes_color": "Green"
     }
   },
   {
     "model": "TestCase.eyes",
-    "pk": 3,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e187",
     "fields": {
       "eyes_color": "Red"
     }
   },
   {
     "model": "TestCase.eyes",
-    "pk": 4,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e188",
     "fields": {
       "eyes_color": "Black"
     }
   },
   {
     "model": "TestCase.users",
-    "pk": 1,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e189",
     "fields": {
       "firstname": "Jon",
       "surname": "Snow",
@@ -71,7 +71,7 @@
   },
   {
     "model": "TestCase.users",
-    "pk": 2,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e110",
     "fields": {
       "firstname": "Sidious",
       "surname": "Darth",
@@ -85,7 +85,7 @@
   },
   {
     "model": "TestCase.users",
-    "pk": 3,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e111",
     "fields": {
       "firstname": "Neo",
       "surname": "Anderson",
@@ -99,17 +99,10 @@
   },
   {
     "model": "TestCase.fotoalbum",
-    "pk": 1,
+    "pk": "f7f1ce12-e36f-4b58-a999-dbde2e95e112",
     "fields": {
-      "title": "default"
-    }
-  },
-  {
-    "model": "TestCase.foto",
-    "pk": 1,
-    "fields": {
-      "album": "default",
-      "foto": "test.png"
+      "title": "default",
+      "user": "f7f1ce12-e36f-4b58-a999-dbde2e95e189"
     }
   }
 ]
