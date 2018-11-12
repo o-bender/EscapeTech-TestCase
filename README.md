@@ -1,4 +1,4 @@
-mkdir ProjectName
+```mkdir ProjectName
 cd ProjectName
 python3 venv venv
 venv/bin/activate
@@ -9,3 +9,7 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py loaddata --format=json --app=TestCase TestCase/country.json
 python3 manage.py runserver
+
+celery worker -A ImageUpload --loglevel=debug --concurrency=4
+redis-server --port 7777
+```
